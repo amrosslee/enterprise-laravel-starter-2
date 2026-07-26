@@ -15,8 +15,6 @@ class UserRoleSeeder extends Seeder
     public function run(): void
     {
         foreach (UserRole::cases() as $role) {
-            $role === UserRole::Manager ?
-                Role::create(['name' => $role->value, 'guard_name' => 'admin']) :
                 Role::create(['name' => $role->value]);
         }
     }
