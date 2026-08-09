@@ -34,16 +34,16 @@ use Spatie\Permission\Traits\HasRoles;
  */
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
-class User extends Authenticatable implements PasskeyUser, MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory,
+    use HasApiTokens,
+        HasFactory,
+        HasRoles,
         Notifiable,
         PasskeyAuthenticatable,
-        TwoFactorAuthenticatable,
-        HasRoles,
-        HasApiTokens,
-        SoftDeletes;
+        SoftDeletes,
+        TwoFactorAuthenticatable;
 
     /**
      * Get the attributes that should be cast.
@@ -61,8 +61,6 @@ class User extends Authenticatable implements PasskeyUser, MustVerifyEmail
 
     /**
      * Get the company that owns the User
-     *
-     * @return BelongsTo
      */
     public function company(): BelongsTo
     {

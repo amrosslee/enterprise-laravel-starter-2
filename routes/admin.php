@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-Route::group(["prefix"=> "admin"], function () {
+
+Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', function () {
-        return "Admin Dashboard";
+        return 'Admin Dashboard';
     })->name('admin.dashboard');
 });
